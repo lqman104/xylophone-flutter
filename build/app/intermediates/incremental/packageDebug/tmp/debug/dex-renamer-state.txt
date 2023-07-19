@@ -1,0 +1,4 @@
+#Tue Jul 18 20:23:10 WIB 2023
+base.0=/Users/luqmanhakim/Downloads/android-project/flutter/magic-8-ball-flutter/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
