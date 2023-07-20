@@ -1,42 +1,48 @@
-import 'dart:math';
-
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MagicBall());
+void main() => runApp(XylophoneApp());
 
-class MagicBall extends StatefulWidget {
-  const MagicBall({super.key});
-
-  @override
-  State<MagicBall> createState() => _MagicBallState();
-}
-
-class _MagicBallState extends State<MagicBall> {
-  int number = 1;
-
+class XylophoneApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.blue,
-        appBar: AppBar(
-          backgroundColor: Colors.blue.shade900,
-          title: Text(
-            "Ask me anything",
-            style: TextStyle(fontSize: 30),
-          ),
-        ),
-        body: Center(
-          child: TextButton(
-            child: Image.asset("images/ball$number.png"),
-            onPressed: () {
-              setState(() {
-                number = Random().nextInt(5) + 1;
-              });
-            },
+        backgroundColor: Colors.black,
+        body: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              buttonNote(soundNumber :1, color: Colors.red),
+              buttonNote(soundNumber :2, color: Colors.orange),
+              buttonNote(soundNumber :3, color: Colors.yellow),
+              buttonNote(soundNumber :4, color: Colors.green),
+              buttonNote(soundNumber :5, color: Colors.teal),
+              buttonNote(soundNumber :6, color: Colors.blue),
+              buttonNote(soundNumber :7, color: Colors.purple),
+            ],
           ),
         ),
       ),
     );
+  }
+
+  Widget buttonNote({required Color color, required int soundNumber}) {
+    return Expanded(
+      child: TextButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(color)
+        ),
+        onPressed: () {
+          playSound(soundNumber);
+        },
+        child: Text(""),
+      ),
+    );
+  }
+
+  void playSound(int note) async {
+    final audioPlayer = AudioPlayer();
+    await audioPlayer.play(AssetSource("note$note.wav"));
   }
 }
